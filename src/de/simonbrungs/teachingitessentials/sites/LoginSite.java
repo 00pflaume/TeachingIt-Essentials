@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import de.simonbrungs.teachingit.TeachingIt;
 import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
 import de.simonbrungs.teachingit.api.events.Listener;
-import de.simonbrungs.teachingitessentials.Essentials;
 
 public class LoginSite implements Listener<ContentCreateEvent> {
 
@@ -23,7 +22,6 @@ public class LoginSite implements Listener<ContentCreateEvent> {
 						"<h1 style='color: #c0392b;'>You are already logged in</h1>+" + "You are already logged in.");
 				return;
 			}
-			Essentials.getMain().createHTMLPages();
 			byte[] encoded = null;
 			try {
 				encoded = Files.readAllBytes(Paths.get("./plugins/Essentials/login.html"));

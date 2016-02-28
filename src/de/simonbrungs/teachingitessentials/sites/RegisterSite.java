@@ -26,7 +26,7 @@ public class RegisterSite implements Listener<ContentCreateEvent> {
 				}
 			}
 			content += " <form action='http://" + TeachingIt.getInstance().getHomeDirectory()
-					+ "register' method='POST'>"
+					+ "registred' method='POST'>"
 					+ "<input type='email' name='email' placeholder='Email' placeholder='Username' value='"
 					+ nullToEmpty(pEvent.getUser().getPostRequest("email")) + "'>" + "<br>"
 					+ "<input type='text' name='username' placeholder='Username' value='"

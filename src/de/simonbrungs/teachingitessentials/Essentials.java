@@ -1,15 +1,22 @@
 package de.simonbrungs.teachingitessentials;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
 
 import de.simonbrungs.teachingit.TeachingIt;
+import de.simonbrungs.teachingit.api.Console;
 import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
 import de.simonbrungs.teachingit.api.events.HeaderCreateEvent;
 import de.simonbrungs.teachingit.api.events.WebsiteCallEvent;
 import de.simonbrungs.teachingit.api.plugin.Plugin;
+import de.simonbrungs.teachingitessentials.commands.CreateAccount;
+import de.simonbrungs.teachingitessentials.commands.Reload;
 import de.simonbrungs.teachingitessentials.otherlisteners.Login;
+import de.simonbrungs.teachingitessentials.otherlisteners.Registerd;
 import de.simonbrungs.teachingitessentials.sites.LoginHeader;
 import de.simonbrungs.teachingitessentials.sites.LoginSite;
 import de.simonbrungs.teachingitessentials.sites.MainPage;
@@ -18,6 +25,9 @@ import de.simonbrungs.teachingitessentials.sites.RegisterSite;
 public class Essentials extends Plugin {
 	public static final String PREFIX = "[Essentials] ";
 	private static Essentials main = null;
+	private String loginCSS;
+	private String loginHTML;
+	private String mainPage;
 
 	@Override
 	public void onDisable() {
@@ -31,18 +41,61 @@ public class Essentials extends Plugin {
 	@Override
 	public void onEnable() {
 		main = this;
-		System.out.println(PREFIX + "Enabling Essentials");
+		Console.getInstance().registerCommand(new Reload(), "reload");
+		Console.getInstance().registerCommand(new CreateAccount(), "createaccount");
+		TeachingIt.getInstance().getLogger().log(Level.INFO, Essentials.PREFIX + "Enabling Essentials");
+		reload();
 		TeachingIt.getInstance().getEventExecuter().registerListener(new RegisterSite(), ContentCreateEvent.class,
 				1000);
+		TeachingIt.getInstance().getEventExecuter().registerListener(new Registerd(), WebsiteCallEvent.class, 1000);
+
 		TeachingIt.getInstance().getEventExecuter().registerListener(new MainPage(), ContentCreateEvent.class, 1000);
-		createHTMLPages();
 		TeachingIt.getInstance().getEventExecuter().registerListener(new LoginSite(), ContentCreateEvent.class, 1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new Login(), WebsiteCallEvent.class, 1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new LoginHeader(), HeaderCreateEvent.class, 1000);
-
 	}
 
-	public void createHTMLPages() {
+	public void reload() {
+		createPages();
+		loginCSS = read(new File("./plugins/Essentials/login.css"));
+		loginHTML = read(new File("./plugins/Essentials/login.html"));
+		mainPage = read(new File("./plugins/Essentials/index.html"));
+	}
+
+	public String getMainPage() {
+		return mainPage;
+	}
+
+	public String getLoginHTML() {
+		return loginHTML;
+	}
+
+	private String read(File pFile) {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(pFile));
+			String content = "";
+			while (br.ready())
+				content += br.readLine();
+			return content;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+
+	public String getLoginCSS() {
+		return loginCSS;
+	}
+
+	public void createPages() {
 		File folder = new File("./plugins/Essentials");
 		if (!folder.exists()) {
 			folder.mkdirs();
