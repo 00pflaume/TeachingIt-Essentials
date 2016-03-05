@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import de.simonbrungs.teachingit.TeachingIt;
 import de.simonbrungs.teachingit.api.Console;
 import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
+import de.simonbrungs.teachingit.api.events.EventExecuter;
 import de.simonbrungs.teachingit.api.events.HeaderCreateEvent;
 import de.simonbrungs.teachingit.api.events.WebsiteCallEvent;
 import de.simonbrungs.teachingit.api.plugin.Plugin;
@@ -17,10 +18,13 @@ import de.simonbrungs.teachingitessentials.commands.CreateAccount;
 import de.simonbrungs.teachingitessentials.commands.Reload;
 import de.simonbrungs.teachingitessentials.otherlisteners.Login;
 import de.simonbrungs.teachingitessentials.otherlisteners.Registerd;
+import de.simonbrungs.teachingitessentials.otherlisteners.SignedInPage;
+import de.simonbrungs.teachingitessentials.sites.AboutMe;
 import de.simonbrungs.teachingitessentials.sites.LoginHeader;
 import de.simonbrungs.teachingitessentials.sites.LoginSite;
 import de.simonbrungs.teachingitessentials.sites.MainPage;
 import de.simonbrungs.teachingitessentials.sites.RegisterSite;
+import de.simonbrungs.teachingitessentials.sites.RegisterdSite;
 
 public class Essentials extends Plugin {
 	public static final String PREFIX = "[Essentials] ";
@@ -48,11 +52,15 @@ public class Essentials extends Plugin {
 		TeachingIt.getInstance().getEventExecuter().registerListener(new RegisterSite(), ContentCreateEvent.class,
 				1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new Registerd(), WebsiteCallEvent.class, 1000);
-
+		TeachingIt.getInstance().getEventExecuter().registerListener(new RegisterdSite(), ContentCreateEvent.class,
+				1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new MainPage(), ContentCreateEvent.class, 1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new LoginSite(), ContentCreateEvent.class, 1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new Login(), WebsiteCallEvent.class, 1000);
 		TeachingIt.getInstance().getEventExecuter().registerListener(new LoginHeader(), HeaderCreateEvent.class, 1000);
+		EventExecuter.getInstance().registerListener(new SignedInPage(), WebsiteCallEvent.class, 1000);
+		EventExecuter.getInstance().registerListener(new AboutMe(), ContentCreateEvent.class, 1000);
+
 	}
 
 	public void reload() {
@@ -118,8 +126,8 @@ public class Essentials extends Plugin {
 			if (file.createNewFile()) {
 				PrintWriter writer = new PrintWriter(file);
 				writer.println(
-						"<h1>Login</h1><form action='loggingin' method='POST' style='margin: 0 auto; width:250px;'>"
-								+ "<div class='input'>"
+						"<h1>Login</h1><form action='aboutme' method='POST' style='margin: 0 auto; width:250px;'>"
+								+ "<div class='input'>" + "<input type='hidden' value='checked' name='check'>"
 								+ "<input class='input' name='username' placeholder='username' pattern='.{1,128}' "
 								+ "required='true' type='text'>" + "</div><div class='input'>"
 								+ "<input class='input' name='password' placeholder='password' pattern='.{1,}' "
