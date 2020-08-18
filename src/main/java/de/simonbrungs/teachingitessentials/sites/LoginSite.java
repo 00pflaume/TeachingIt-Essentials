@@ -19,7 +19,7 @@ public class LoginSite implements Listener<ContentCreateEvent> {
 			pEvent.setTitle(TeachingIt.getInstance().getConfig().getProperty("SiteName") + " - Login");
 			if (pEvent.getUser().getAccount() != null) {
 				pEvent.setContent(
-						"<h1 style='color: #c0392b;'>You are already logged in</h1>+" + "You are already logged in.");
+						"<h1 style='color: #c0392b;'>You are already logged in</h1>" + "You are already logged in.");
 				return;
 			}
 			byte[] encoded = null;
