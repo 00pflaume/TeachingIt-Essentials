@@ -11,7 +11,6 @@ public class Login implements Listener<WebsiteCallEvent> {
 		if (pEvent.getUser().getCalledPath().equals("loggingin")) {
 			if (pEvent.getUser().getAccount() != null) {
 				pEvent.getUser().setUserVar("de.simonbrungs.teachingitessentials.alreadyloggedin", "true");
-				return;
 			} else {
 				String username = (String) pEvent.getUser().getPostRequest("username");
 				String password = TeachingIt.getInstance().getAccountManager()

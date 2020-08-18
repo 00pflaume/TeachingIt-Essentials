@@ -17,7 +17,7 @@ public class SignedInPage implements Listener<WebsiteCallEvent> {
 										.encryptPassword((String) pEvent.getUser().getPostRequest("password"))));
 				if (pEvent.getUser().getAccount() != null) {
 					AccountManager.getInstance().setSessionKey(pEvent.getUser().getIPAddress(), "username",
-							(String) pEvent.getUser().getPostRequest("username"));
+							pEvent.getUser().getPostRequest("username"));
 				}
 			}
 	}

@@ -5,11 +5,11 @@ import de.simonbrungs.teachingit.api.events.WebsiteCallEvent;
 import de.simonbrungs.teachingit.api.users.Account;
 import de.simonbrungs.teachingit.api.users.AccountManager;
 
-public class Registerd implements Listener<WebsiteCallEvent> {
+public class Registered implements Listener<WebsiteCallEvent> {
 
 	@Override
 	public void executeEvent(WebsiteCallEvent pHCE) {
-		if (pHCE.getUser().getCalledPath().equals("registred")) {
+		if (pHCE.getUser().getCalledPath().equals("registered")) {
 			if (pHCE.getUser().getAccount() == null) {
 				String email = (String) pHCE.getUser().getPostRequest("email");
 				if (email != null) {
@@ -23,7 +23,7 @@ public class Registerd implements Listener<WebsiteCallEvent> {
 											AccountManager.getInstance().encryptPassword(password), (byte) 1);
 									if (acc != null)
 										AccountManager.getInstance().setSessionKey(pHCE.getUser().getIPAddress(),
-												"registerd", "true");
+												"registered", "true");
 								}
 						}
 					}

@@ -3,14 +3,14 @@ package de.simonbrungs.teachingitessentials;
 import de.simonbrungs.teachingit.TeachingIt;
 import de.simonbrungs.teachingit.api.Console;
 import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
-import de.simonbrungs.teachingit.api.events.EventExecuter;
+import de.simonbrungs.teachingit.api.events.EventExecutor;
 import de.simonbrungs.teachingit.api.events.HeaderCreateEvent;
 import de.simonbrungs.teachingit.api.events.WebsiteCallEvent;
 import de.simonbrungs.teachingit.api.plugin.Plugin;
 import de.simonbrungs.teachingitessentials.commands.CreateAccount;
 import de.simonbrungs.teachingitessentials.commands.Reload;
 import de.simonbrungs.teachingitessentials.otherlisteners.Login;
-import de.simonbrungs.teachingitessentials.otherlisteners.Registerd;
+import de.simonbrungs.teachingitessentials.otherlisteners.Registered;
 import de.simonbrungs.teachingitessentials.otherlisteners.SignedInPage;
 import de.simonbrungs.teachingitessentials.sites.*;
 
@@ -40,17 +40,17 @@ public class Essentials extends Plugin {
 		Console.getInstance().registerCommand(new CreateAccount(), "createaccount");
 		TeachingIt.getInstance().getLogger().log(Level.INFO, Essentials.PREFIX + "Enabling Essentials");
 		reload();
-		TeachingIt.getInstance().getEventExecuter().registerListener(new RegisterSite(), ContentCreateEvent.class,
+		TeachingIt.getInstance().getEventExecutor().registerListener(new RegisterSite(), ContentCreateEvent.class,
 				1000);
-		TeachingIt.getInstance().getEventExecuter().registerListener(new Registerd(), WebsiteCallEvent.class, 1000);
-		TeachingIt.getInstance().getEventExecuter().registerListener(new RegisterdSite(), ContentCreateEvent.class,
+		TeachingIt.getInstance().getEventExecutor().registerListener(new Registered(), WebsiteCallEvent.class, 1000);
+		TeachingIt.getInstance().getEventExecutor().registerListener(new RegisteredSite(), ContentCreateEvent.class,
 				1000);
-		TeachingIt.getInstance().getEventExecuter().registerListener(new MainPage(), ContentCreateEvent.class, 1000);
-		TeachingIt.getInstance().getEventExecuter().registerListener(new LoginSite(), ContentCreateEvent.class, 1000);
-		TeachingIt.getInstance().getEventExecuter().registerListener(new Login(), WebsiteCallEvent.class, 1000);
-		TeachingIt.getInstance().getEventExecuter().registerListener(new LoginHeader(), HeaderCreateEvent.class, 1000);
-		EventExecuter.getInstance().registerListener(new SignedInPage(), WebsiteCallEvent.class, 1000);
-		EventExecuter.getInstance().registerListener(new AboutMe(), ContentCreateEvent.class, 1000);
+		TeachingIt.getInstance().getEventExecutor().registerListener(new MainPage(), ContentCreateEvent.class, 1000);
+		TeachingIt.getInstance().getEventExecutor().registerListener(new LoginSite(), ContentCreateEvent.class, 1000);
+		TeachingIt.getInstance().getEventExecutor().registerListener(new Login(), WebsiteCallEvent.class, 1000);
+		TeachingIt.getInstance().getEventExecutor().registerListener(new LoginHeader(), HeaderCreateEvent.class, 1000);
+		EventExecutor.getInstance().registerListener(new SignedInPage(), WebsiteCallEvent.class, 1000);
+		EventExecutor.getInstance().registerListener(new AboutMe(), ContentCreateEvent.class, 1000);
 
 	}
 
@@ -73,10 +73,10 @@ public class Essentials extends Plugin {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(pFile));
-			String content = "";
+			StringBuilder content = new StringBuilder();
 			while (br.ready())
-				content += br.readLine();
-			return content;
+				content.append(br.readLine());
+			return content.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
