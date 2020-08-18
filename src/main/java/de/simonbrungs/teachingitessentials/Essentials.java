@@ -1,12 +1,5 @@
 package de.simonbrungs.teachingitessentials;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-
 import de.simonbrungs.teachingit.TeachingIt;
 import de.simonbrungs.teachingit.api.Console;
 import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
@@ -19,12 +12,10 @@ import de.simonbrungs.teachingitessentials.commands.Reload;
 import de.simonbrungs.teachingitessentials.otherlisteners.Login;
 import de.simonbrungs.teachingitessentials.otherlisteners.Registerd;
 import de.simonbrungs.teachingitessentials.otherlisteners.SignedInPage;
-import de.simonbrungs.teachingitessentials.sites.AboutMe;
-import de.simonbrungs.teachingitessentials.sites.LoginHeader;
-import de.simonbrungs.teachingitessentials.sites.LoginSite;
-import de.simonbrungs.teachingitessentials.sites.MainPage;
-import de.simonbrungs.teachingitessentials.sites.RegisterSite;
-import de.simonbrungs.teachingitessentials.sites.RegisterdSite;
+import de.simonbrungs.teachingitessentials.sites.*;
+
+import java.io.*;
+import java.util.logging.Level;
 
 public class Essentials extends Plugin {
 	public static final String PREFIX = "[Essentials] ";
@@ -33,13 +24,13 @@ public class Essentials extends Plugin {
 	private String loginHTML;
 	private String mainPage;
 
+	public static Essentials getMain() {
+		return main;
+	}
+
 	@Override
 	public void onDisable() {
 		System.out.println(PREFIX + " Disabling Essentials");
-	}
-
-	public static Essentials getMain() {
-		return main;
 	}
 
 	@Override

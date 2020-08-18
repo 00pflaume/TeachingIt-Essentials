@@ -1,12 +1,12 @@
 package de.simonbrungs.teachingitessentials.commands;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-
 import de.simonbrungs.teachingit.TeachingIt;
 import de.simonbrungs.teachingit.api.Command;
 import de.simonbrungs.teachingit.api.users.Account;
 import de.simonbrungs.teachingit.api.users.AccountManager;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class CreateAccount implements Command {
 

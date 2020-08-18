@@ -1,13 +1,13 @@
 package de.simonbrungs.teachingitessentials.sites;
 
+import de.simonbrungs.teachingit.TeachingIt;
+import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
+import de.simonbrungs.teachingit.api.events.Listener;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import de.simonbrungs.teachingit.TeachingIt;
-import de.simonbrungs.teachingit.api.events.ContentCreateEvent;
-import de.simonbrungs.teachingit.api.events.Listener;
 
 public class LoginSite implements Listener<ContentCreateEvent> {
 
