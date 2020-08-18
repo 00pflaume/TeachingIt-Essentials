@@ -8,6 +8,8 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 bin/
+.settings/
+dir.buildfile/
 # Windows Installer files
 *.cab
 *.msi
@@ -46,3 +48,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /bin/
+/target/
+.project
+.classpath
+*.iml
+/.idea/
