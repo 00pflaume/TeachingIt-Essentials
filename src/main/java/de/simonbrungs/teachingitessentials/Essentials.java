@@ -115,7 +115,7 @@ public class Essentials extends Plugin {
 				writer.println("<h1>This is the main page</h1>");
 				writer.println("Hello world. You can register your self <a href='/register'>here</a> "
 						+ "or login <a href='/login'>here</a>. You can replace this text by "
-						+ "editing the index.html int the " + "plugin folder of essentials");
+						+ "editing the index.html in the " + "plugin folder of essentials");
 				writer.close();
 			}
 		} catch (IOException e) {
